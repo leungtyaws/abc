@@ -3,12 +3,13 @@ phases:
   install:
     commands:
       - mkdir -p ~/.ssh
-      - echo $KEY ~/.ssh/test_rsa
+      - echo $KEY >> ~/.ssh/test_rsa
       - chmod 600 ~/.ssh/test_rsa
       - echo "StrictHostKeyChecking no" >> ~/.ssh/config
       - apt-get update
       - apt-get install -y openssh-client
       - eval "$(ssh-agent -s)" && ssh-add -k ~/.ssh/test_rsa
+      - ssh -T git@github.com
   pre_build:
     commands:
 
